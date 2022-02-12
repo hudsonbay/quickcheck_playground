@@ -2,17 +2,11 @@ defmodule QuickcheckPlayground do
   @moduledoc """
   Documentation for `QuickcheckPlayground`.
   """
+  def is_sorted([]), do: true
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> QuickcheckPlayground.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  def is_sorted(list) do
+    list
+    |> Enum.zip(tl(list))
+    |> Enum.all?(fn {x, y} -> x <= y end)
   end
 end
