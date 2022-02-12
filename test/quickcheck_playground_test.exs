@@ -34,4 +34,17 @@ defmodule QuickcheckPlaygroundTest do
       ensure(l |> Enum.uniq() == l |> Enum.uniq() |> Enum.uniq())
     end
   end
+
+  property "tail of list" do
+    forall l <- non_empty(list(int)) do
+      [_head | tail] = l
+      ensure(tl(l) == tail)
+    end
+  end
+
+  property "list concatenation" do
+    forall {l1, l2} <- {list(int), list(int)} do
+      ensure(Enum.concat(l1, l2) == l1 ++ l2)
+    end
+  end
 end
